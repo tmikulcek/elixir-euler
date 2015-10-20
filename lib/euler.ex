@@ -8,12 +8,27 @@ defmodule Euler do
   end
 
   def special_pythagorean_triplet() do
-    triplet = hd(pythagorean(1000))
-    elem(triplet, 0) * elem(triplet, 1) * elem(triplet, 2)
+    hd(pythagorean(1000))
   end
 
   def fib_seq(start1, start2) do
     Stream.unfold({start1, start2}, fn {a, b} -> {a, {b, a + b}} end)
+  end
+  
+  @doc """
+    This function will not work as expected.
+    No matter how many times you call the returned function, first and second will always have the values a and b, respectively.
+  """
+  def fib_wrong(a,b) do
+    first = a
+    second = b
+    fn -> next = first + second
+      IO.puts(first)
+      IO.puts(second)
+      IO.puts(next)
+      first = second
+      second = next
+    end
   end
 
   def fibonacci_actor(first, second) do
@@ -30,6 +45,6 @@ defmodule Euler do
         c <- b + 1..n,
         a + b + c == n,
         a*a + b*b == c*c,
-    do: {a, b, c}
+    do: a * b * c 
   end
 end
