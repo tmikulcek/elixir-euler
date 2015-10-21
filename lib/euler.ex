@@ -1,19 +1,11 @@
 defmodule Euler do
-  def multiples_of_3_and_5() do
-    1..999 |> Stream.filter(fn n -> rem(n, 3) == 0 or rem(n,5) == 0 end) |> Enum.sum
-  end
+  def multiples_of_3_and_5(), do: Stream.filter(1..999, fn n -> rem(n, 3) == 0 or rem(n,5) == 0 end) |> Enum.sum
 
-  def even_fibonacci() do
-    fib_seq(1, 2) |> Stream.take_while(&(&1 < 4_000_000)) |> Stream.filter(&(rem(&1, 2) == 0)) |> Enum.sum
-  end
+  def even_fibonacci(), do: fib_seq(1, 2) |> Stream.take_while(&(&1 < 4_000_000)) |> Stream.filter(&(rem(&1, 2) == 0)) |> Enum.sum
 
-  def special_pythagorean_triplet() do
-    hd(pythagorean(1000))
-  end
+  def special_pythagorean_triplet(), do: hd(pythagorean(1000))
 
-  def fib_seq(start1, start2) do
-    Stream.unfold({start1, start2}, fn {a, b} -> {a, {b, a + b}} end)
-  end
+  def fib_seq(start1, start2), do: Stream.unfold({start1, start2}, fn {a, b} -> {a, {b, a + b}} end)
   
   @doc """
     This function will not work as expected.
