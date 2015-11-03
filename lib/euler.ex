@@ -25,11 +25,11 @@ defmodule Euler do
   end
 
   defp triangle_numbers do
-    Stream.unfold(100_000_000, fn acc -> {1..acc |> Enum.sum, acc + 1} end)
+    Stream.unfold(1_000_000_000, fn acc -> {1..acc |> Enum.sum, acc + 1} end)
   end
   
   #TODO: very inefficient
-  defp divisors_of(n) do
+  def divisors_of(n) do
     1..round(n/2) |> Enum.filter(fn x -> rem(n, x) == 0 end)
   end
 end
