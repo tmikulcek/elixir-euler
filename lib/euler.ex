@@ -6,6 +6,29 @@ defmodule Euler do
 
   def special_pythagorean_triplet(), do: hd(pythagorean(1000))
 
+  @doc """
+    Using names.txt (right click and 'Save Link/Target As...'), a 46K text file containing over five-thousand first names, begin by sorting it into alphabetical order. Then working out the alphabetical value for each name, multiply this value by its alphabetical position in the list to obtain a name score.
+    For example, when the list is sorted into alphabetical order, COLIN, which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list. So, COLIN would obtain a score of 938 × 53 = 49714.
+    What is the total of all the name scores in the file?
+  """
+  def names_scores() do
+    names = File.open!(Path.expand('p022_names.txt'), [:utf8, :read])
+
+    IO.read(names, :line)
+      |> String.split(",")
+      |> Enum.sort
+      |> Enum.map(fn quoted -> String.strip(quoted, ?") end)
+      |> Enum.with_index
+      |> Enum.map(fn {name, index} -> (index + 1) * sum_name(name) end)
+      |> Enum.sum
+  end
+
+  defp sum_name(name) do
+    String.to_char_list(name)
+      |> Enum.map(fn char -> char - 64 end)
+      |> Enum.sum
+  end
+
   defp pythagorean(n) when n > 0 do
     for a <- 1..n - 2,
         b <- a + 1..n - 1,
