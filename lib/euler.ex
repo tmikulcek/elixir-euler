@@ -16,8 +16,8 @@ defmodule Euler do
 
     IO.read(names, :line)
       |> String.split(",")
-      |> Enum.sort
       |> Enum.map(fn quoted -> String.strip(quoted, ?") end)
+      |> Enum.sort
       |> Enum.with_index
       |> Enum.map(fn {name, index} -> (index + 1) * sum_name(name) end)
       |> Enum.sum
