@@ -33,7 +33,7 @@ defmodule Euler do
 
 
   defp sum_name(name) do
-    String.to_char_list(name)
+    String.to_charlist(name)
       |> Enum.map(fn char -> char - 64 end)
       |> Enum.sum
   end
@@ -49,7 +49,7 @@ defmodule Euler do
     IO.read(names, :line)
       |> String.split(",")
       |> Enum.sort
-      |> Enum.map(fn quoted -> String.strip(quoted, ?") end)
+      |> Enum.map(fn quoted -> String.trim(quoted, ?") end)
       |> Enum.with_index
       |> Enum.map(fn {name, index} -> (index + 1) * sum_name(name) end)
       |> Enum.sum
